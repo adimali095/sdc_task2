@@ -11,7 +11,18 @@ app.use('/api/v1/students',studentRoutes);
 app.use('/api/v1/mentors',mentorRoutes);
 
 app.get("/",(req,res)=>{
-    res.status(200).send("<h1>Homepage</h1>");
+    res.status(200).send(
+        `<h1>Homepage</h1>
+        <ul>
+            <li>
+                <a href="/api/v1/students">Get All Students</a>
+            </li>
+            <li>
+                <a href="/api/v1/students">Get All Mentors</a>
+            </li>
+        </ul>
+        `
+    );
 })
 
 app.get("*",(req,res)=>{
