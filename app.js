@@ -18,7 +18,16 @@ app.get("/",(req,res)=>{
                 <a href="/api/v1/students">Get All Students</a>
             </li>
             <li>
-                <a href="/api/v1/students">Get All Mentors</a>
+                <a href="/api/v1/mentors">Get All Mentors</a>
+            </li>
+            <li>
+                <a href="/api/v1/students/1">Get Specific Student</a>
+            </li>
+            <li>
+                <a href="/api/v1/mentors/1">Get Specific Mentor</a>
+            </li>
+            <li>
+                <a href="/api/v1/mentors/1/mentees">Get Mentees of Secific Mentor</a>
             </li>
         </ul>
         `
