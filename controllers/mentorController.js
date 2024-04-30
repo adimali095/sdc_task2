@@ -52,14 +52,26 @@ const getMentorMentees = async (req,res)=>{
 const addMentor = async (req,res)=>{
     try{
     //console.log(req.body)
-    const {mentor} = req.body;
-    const re = await addMentorToDB(mentor);
-    //console.log(re);
-    res.status(200).send("<h4>Mentor Added Successfully</h4>")
+    //const {mentor} = req.body;
+    const mentor ={};
+    for (const key in req.body) {
+        if(String(key) === "mentees[]"){
+            mentor["mentees"] = req.body[key];
+            continue;    
+        }
+        mentor[String(key)] = req.body[key];
+    }
+    //console.log(mentor);
+    const res2 = await addMentorToDB(mentor);
+    //console.log(res2);
+    if(!res2){
+        return res.status(404).send("<h4>Mentees with specified prns do not exist</h4>")
+    }
+    return res.status(200).send("<h4>Mentor Added Successfully</h4>")
     }
     catch(error){
         console.log(error);
-        res.status(500).send("<h4>Error 500 : Internal Server Error</h4>")
+        return res.status(500).send("<h4>Error 500 : Internal Server Error</h4>")
     }
 
 }

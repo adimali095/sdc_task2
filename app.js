@@ -7,12 +7,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
+app.use(express.static("./public"))
 app.use('/api/v1/students',studentRoutes);
 app.use('/api/v1/mentors',mentorRoutes);
 
 app.get("/",(req,res)=>{
     res.status(200).send(
         `<h1>Homepage</h1>
+        <h2>Get Requests</h2>
         <ul>
             <li>
                 <a href="/api/v1/students">Get All Students</a>
@@ -28,6 +30,15 @@ app.get("/",(req,res)=>{
             </li>
             <li>
                 <a href="/api/v1/mentors/1/mentees">Get Mentees of Secific Mentor</a>
+            </li>
+        </ul>
+        <h2>Post Requests</h2>
+        <ul>
+            <li>
+                <a href="/studentform.html" target="_blank">Post (Add) Student Entry</a>
+            </li>
+            <li>
+                <a href="/mentorform.html" target="_blank">Post (Add) Mentor Entry</a>
             </li>
         </ul>
         `

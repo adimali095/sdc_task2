@@ -31,11 +31,12 @@ const getStudent = async(req,res)=>{
     }
 }
 const addStudent = async (req,res)=>{
-    //console.log("in addstudents")
     try{
-    
-    //console.log(req.body)
-    const {student} = req.body;
+    const student = {};
+    for (const key in req.body) {
+        student[String(key)] = req.body[key];
+    }
+    //console.log(student);
     const re = await addStudentToDB(student);
     //console.log(re);
     res.status(200).send("<h4>Student Added Successfully</h4>")

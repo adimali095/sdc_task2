@@ -12,7 +12,7 @@ async function getAllStudentsFromDB(){
 }
 
 async function getStudentFromDB(PRN){
-    const studentRef = db.collection("students").doc(PRN);
+    const studentRef = db.collection("students").doc(String(PRN));
     const doc = await studentRef.get();
     if(!doc.exists){
         return null;
@@ -22,7 +22,8 @@ async function getStudentFromDB(PRN){
     //return student || null;
 }
 async function addStudentToDB(student){
-    const studentRef = await db.collection("students").doc(student.prn+"");
+    //console.log(student);
+    const studentRef = await db.collection("students").doc(student.prn);
     const res = studentRef.set(student);
     return res;
 }
