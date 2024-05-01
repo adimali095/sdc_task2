@@ -12,6 +12,7 @@ async function getAllMentorsFromDB(){
     //return data.mentors;
 }
 async function getMentorFromDB(MentorID){
+    
     const mentorRef = db.collection("mentors").doc(MentorID);
     const doc =await mentorRef.get();
     if(!doc.exists){
@@ -56,10 +57,16 @@ async function allDocumentsExist(collectionName, docIds)
     return results.every(doc => doc.exists);
 }
 async function addMentorToDB(mentor){
-
-    const menteesExist = await allDocumentsExist("students",mentor.mentees);
-    if(!menteesExist){
-        return null;
+    //console.log(mentor);
+    if(mentor.mentees !== "" && mentor.mentees !== null)
+    {
+        const menteesExist = await allDocumentsExist("students",mentor.mentees);
+        if(!menteesExist){
+            return null;
+        }
+    }
+    else{
+        mentor.mentees = [];
     }
     if(!Array.isArray(mentor.mentees)){
         mentor.mentees = Array.of(mentor.mentees);
